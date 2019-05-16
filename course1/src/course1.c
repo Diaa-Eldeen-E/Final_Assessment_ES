@@ -109,7 +109,6 @@ int8_t test_memmove1() {
   print_array(set, MEM_SET_SIZE_B);
   my_memmove(ptra, ptrb, TEST_MEMMOVE_LENGTH);
   print_array(set, MEM_SET_SIZE_B);
-
   for (i = 0; i < TEST_MEMMOVE_LENGTH; i++)
   {
     if (set[i + 16] != i)

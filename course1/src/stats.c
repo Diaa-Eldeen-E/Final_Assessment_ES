@@ -30,24 +30,25 @@
 
 #include <stdio.h>
 #include "stats.h"
-
+#include "platform.h"
 
 /* Size of the Data Set */
 #define SIZE (40)
-
-void main() {
+/*
+int main() {
 
   unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
                               114, 88,   45,  76, 123,  87,  25,  23,
                               200, 122, 150, 90,   92,  87, 177, 244,
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
-  /* Other Variable Declarations Go Here */ 
+  // Other Variable Declarations Go Here  
    unsigned int n= sizeof(test) / sizeof(unsigned char) ;   //number of elements
-  /* Statistics and Printing Functions Go Here */
+  // Statistics and Printing Functions Go Here 
    print_array(test,n);       //prints the sorted array
    print_statistics(test,n);  //prints the array median, mean, max, min 
-}
+   return 0;
+}*/
 
 /* Add other Implementation File Code Here */
 void print_statistics(unsigned char arr[],unsigned int n){
@@ -60,15 +61,15 @@ void print_statistics(unsigned char arr[],unsigned int n){
 
 
 void print_array(unsigned char arr[],unsigned int n){
-
-   unsigned char* sortedArray=sort_array(arr,n);
-   printf("\nThe sorted array from largest to smallest:\n\n      ");
+#if defined (VERBOSE)
+   PRINTF("\nThe array elements:\n\n      ");
    for (char i =1; i<=n; i++)
    {
-      printf("%3d ", sortedArray[i-1]);
-      if(i%8==0) printf("\n      "); //new line every 8 elements
+      PRINTF("%3d ", arr[i-1]);
+      if(i%8==0) PRINTF("\n      "); //new line every 8 elements
    }
-   printf("\n\n");
+   PRINTF("\n\n");
+#endif
 }
 
 unsigned char find_median(unsigned char arr[],unsigned int n){

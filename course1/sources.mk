@@ -10,7 +10,10 @@
 
 # Add your Source files to this variable
 SOURCES = main.c     \
-	  memory.c
+	  memory.c       \
+	  course1.c      \
+	  data.c         \
+	  stats.c
 
 ifeq ($(PLATFORM), MSP432)
 SOURCES += interrupts_msp432p401r_gcc.c  \

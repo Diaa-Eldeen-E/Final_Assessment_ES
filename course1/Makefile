@@ -35,11 +35,15 @@ include sources.mk
  #linker file directory
 LINKER_FILE = msp432p401r.lds
  #this is the target output name
-TARGET=c1m2
+TARGET=final
  #defualt PLATFORM
 PLATFORM=HOST
+ #courses compile time switch
+COURSE=COURSE1
+ #printing compile time switch
+PRINT=VERBOSE
  #common flags in both platforms
-COM_FLAGS= -Wall -Werror -std=c99 -g -O0 $(INCLUDES) -D$(PLATFORM)
+COM_FLAGS= -Wall -Werror -std=c99 -g -O0 $(INCLUDES) -D$(PLATFORM) -D$(COURSE) -D$(PRINT)
  #rename every .c to .o file and store it in the variable OBJS
 OBJS=$(SOURCES:.c=.o)
  #preprocessor flags to generate .d dependency files
@@ -106,7 +110,7 @@ all: $(TARGET).out
 
  #link and use code size utility
 $(TARGET).out:$(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) 
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lm
 	$(SIZE) -td $@
 
  #so we could use the command "make clean" to clean all that files
