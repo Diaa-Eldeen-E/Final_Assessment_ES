@@ -95,7 +95,7 @@ uint8_t* my_reverse(uint8_t* src,size_t length){
 /* this function allocates a number of bytes (length) in the heap memory and returns a pointer to thier address */
 int32_t* reserve_words(size_t length){
 
-	return malloc(2*length);    //words = 2 bytes
+	return malloc(4*length);    //size of int32_t = 4 bytes
 }
 
 

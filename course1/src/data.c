@@ -11,7 +11,12 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
     if (data<0) { sign =1; data*=-1; }
 
     while(data>0){
-       *(ptr+counter) = data % base + '0' ;   //add the '0' to convert the digit into ASCI
+
+		if (data%base > 9) //for base 16
+    		*(ptr+counter) = (data%base) - 10 + 'A';  //transform the numbers (10,11,12,13,14,15) to (A,B,C,D,E,F)
+
+        else
+			*(ptr+counter) = data % base + '0' ;   //add the '0' to convert the digit into ASCI
         data /=base;
         counter++;
     }
@@ -35,7 +40,10 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base){
 	}
 
 	for(uint8_t i=0;i<digits;i++){
-		sum += (*(ptr+digits-1-i)-'0') * pow(base,i);
+		if (*(ptr+digits-1-i) >= 'A' )
+			sum += (*(ptr+digits-1-i)-'A'+10) * pow(base,i);
+		else 
+			sum += (*(ptr+digits-1-i)-'0') * pow(base,i);
 	}
 
 	if (sign==1) sum*=-1;
