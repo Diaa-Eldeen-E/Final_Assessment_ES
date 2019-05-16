@@ -25,16 +25,17 @@
 /***********************************************************
  Function Definitions
 ***********************************************************/
-
+/* this function moves one-byte elements of number (length) from the address (src) to the address (dst)  */
 uint8_t* my_memmove(uint8_t* src,uint8_t* dst,size_t length){
 
 	//overlap check
-	uint32_t diff = dst-src;
+	int32_t diff = dst-src;    //the number of overlapped elements
 	if (diff < length && diff > 0){
+	  //moving overlapped elements first
 		for(uint8_t i=0;i<diff;i++){
 		*(dst+diff+i) = *(src+diff+i);
 		}
-		length -= diff;
+		length -= diff;   //new length after moving overlapped elements
 	} 
 
 	for (uint8_t i=0;i<length;i++)
@@ -45,6 +46,7 @@ uint8_t* my_memmove(uint8_t* src,uint8_t* dst,size_t length){
 }
 
 
+/* this function moves one-byte elements of number (length) from the address (src) to the address (dst)  */
 uint8_t* my_memcopy(uint8_t* src,uint8_t* dst,size_t length){
 
 	for (uint8_t i=0;i<length;i++)
@@ -55,7 +57,7 @@ uint8_t* my_memcopy(uint8_t* src,uint8_t* dst,size_t length){
 }
 
 
-
+/* this function sets a number of one-byte elements (length) at the address (src) to the value (value) */
 uint8_t* my_memset(uint8_t* src,size_t length,uint8_t value){
 
 	for (uint8_t i=0;i<length;i++)
@@ -65,6 +67,8 @@ uint8_t* my_memset(uint8_t* src,size_t length,uint8_t value){
 	return src;
 }
 
+
+/* this function sets a number of one-byte elements (length) at the address (src) to zeros  */
 uint8_t* my_memzero(uint8_t* src,size_t length){
 
 	for (uint8_t i=0;i<length;i++)
@@ -74,6 +78,8 @@ uint8_t* my_memzero(uint8_t* src,size_t length){
 	return src;
 }
 
+
+/* this function reverses the order of a number of bytes (length) starting from the address (src) */
 uint8_t* my_reverse(uint8_t* src,size_t length){
 	uint8_t temp=0;
 	for (uint8_t i=0;i<length/2;i++)
@@ -85,11 +91,15 @@ uint8_t* my_reverse(uint8_t* src,size_t length){
 	return src;
 }
 
+
+/* this function allocates a number of bytes (length) in the heap memory and returns a pointer to thier address */
 int32_t* reserve_words(size_t length){
 
-	return malloc(2*length);
+	return malloc(2*length);    //words = 2 bytes
 }
 
+
+/* this function frees an allocated bytes from the heap memory from an address (src)  */
 void free_words(uint32_t* src){
 
 	free(src);
